@@ -1,0 +1,151 @@
+Bài 1:
+DROP TABLE IF EXISTS products;
+
+CREATE TABLE products (
+    product_id SERIAL PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    stock INTEGER DEFAULT 0,
+    category VARCHAR(50),
+    created_at DATE DEFAULT CURRENT_DATE
+);
+
+INSERT INTO products (product_name, price, stock, category)
+VALUES
+('Mi Tom Hao Hao', 3500, 200, 'Do an'),
+('Sua tuoi Vinamilk', 32000, 100, 'Do uong'),
+('Banh Oreo', 12000, 150, 'Do an'),
+('Nuoc ngot Coca Cola', 10000, 180, 'Do uong'),
+('Nuoc suoi Lavie', 7000, 300, 'Do uong'),
+('Banh mi', 5000, 120, 'Do an'),
+('Trung ga (10 qua)', 30000, 80, 'Thuc pham'),
+('Gao ST25 (5kg)', 150000, 50, 'Thuc pham'),
+('Dau an Tuong An', 45000, 60, 'Thuc pham'),
+('Duong tinh luyen', 20000, 90, 'Thuc pham'),
+('Muoi iot', 8000, 70, 'Thuc pham'),
+('Nuoc mam Nam Ngu', 40000, 110, 'Gia vi'),
+('Tuong ot Chin-su', 15000, 130, 'Gia vi'),
+('Cafe G7', 55000, 75, 'Do uong'),
+('Tra xanh Khong Do', 10000, 140, 'Do uong'),
+('Bia Heineken', 20000, 200, 'Do uong'),
+('Xuc xich Duc Viet', 25000, 90, 'Thuc pham'),
+('Kem danh rang P/S', 18000, 100, 'Ca nhan'),
+('Xa phong Lifebuoy', 15000, 120, 'Ca nhan'),
+('Nuoc rua chen Sunlight', 30000, 85, 'Gia dung');
+
+SELECT 
+    product_name AS TenSanPham,
+    price AS DonGia
+FROM products;
+
+
+Bài 2:
+DROP TABLE IF EXISTS customers;
+
+CREATE TABLE customers (
+    customer_id SERIAL PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    phone VARCHAR(15),
+    email VARCHAR(100)
+);
+
+INSERT INTO customers (full_name, phone, email)
+VALUES
+('Nguyen Van An', '0901234567', 'an@gmail.com'),
+('Tran Thi Binh', '0912345678', 'binh@gmail.com'),
+('Le Van Cuong', '0923456789', 'cuong@gmail.com'),
+('Pham Thi Dung', '0934567890', 'dung@gmail.com'),
+('Hoang Van Em', '0945678901', 'em@gmail.com'),
+('Vo Thi Phuong', '0956789012', 'phuong@gmail.com'),
+('Do Van Giang', '0967890123', 'giang@gmail.com'),
+('Bui Thi Hoa', '0978901234', 'hoa@gmail.com'),
+('Ly Van Ich', '0989012345', 'ich@gmail.com'),
+('Mai Thi Kim', '0990123456', 'kim@gmail.com');
+
+SELECT * FROM customers
+WHERE full_name ILIKE '%van%';
+
+
+Bài 3:
+DROP TABLE IF EXISTS products;
+
+CREATE TABLE products (
+    product_id SERIAL PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    stock INTEGER DEFAULT 0,
+    category VARCHAR(50),
+    created_at DATE DEFAULT CURRENT_DATE
+);
+
+INSERT INTO products (product_name, price, stock, category)
+VALUES
+('Mi Tom Hao Hao', 3500, 200, 'Do an'),
+('Sua tuoi Vinamilk', 32000, 100, 'Do uong'),
+('Banh Oreo', 12000, 150, 'Do an'),
+('Nuoc ngot Coca Cola', 10000, 180, 'Do uong'),
+('Nuoc suoi Lavie', 7000, 300, 'Do uong'),
+('Banh mi', 5000, 120, 'Do an'),
+('Trung ga (10 qua)', 30000, 80, 'Thuc pham'),
+('Gao ST25 (5kg)', 150000, 50, 'Thuc pham'),
+('Dau an Tuong An', 45000, 60, 'Thuc pham'),
+('Duong tinh luyen', 20000, 90, 'Thuc pham'),
+('Muoi iot', 8000, 70, 'Thuc pham'),
+('Nuoc mam Nam Ngu', 40000, 110, 'Gia vi'),
+('Tuong ot Chin-su', 15000, 130, 'Gia vi'),
+('Cafe G7', 55000, 75, 'Do uong'),
+('Tra xanh Khong Do', 10000, 140, 'Do uong'),
+('Bia Heineken', 20000, 200, 'Do uong'),
+('Xuc xich Duc Viet', 25000, 90, 'Thuc pham'),
+('Kem danh rang P/S', 18000, 100, 'Ca nhan'),
+('Xa phong Lifebuoy', 15000, 120, 'Ca nhan'),
+('Nuoc rua chen Sunlight', 30000, 85, 'Gia dung');
+
+SELECT 
+    product_name AS TenSanPham,
+    price AS DonGia
+FROM products
+ORDER BY price DESC;
+
+
+Bài 4:
+DROP TABLE IF EXISTS products;
+
+CREATE TABLE products (
+    product_id SERIAL PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    stock INTEGER DEFAULT 0,
+    category VARCHAR(50),
+    created_at DATE DEFAULT CURRENT_DATE
+);
+
+INSERT INTO products (product_name, price, stock, category)
+VALUES
+('Mi Tom Hao Hao', 3500, 200, 'Do an'),
+('Sua tuoi Vinamilk', 32000, 100, 'Do uong'),
+('Banh Oreo', 12000, 150, 'Do an'),
+('Nuoc ngot Coca Cola', 10000, 180, 'Do uong'),
+('Nuoc suoi Lavie', 7000, 300, 'Do uong'),
+('Banh mi', 5000, 120, 'Do an'),
+('Trung ga (10 qua)', 30000, 80, 'Thuc pham'),
+('Gao ST25 (5kg)', 150000, 50, 'Thuc pham'),
+('Dau an Tuong An', 45000, 60, 'Thuc pham'),
+('Duong tinh luyen', 20000, 90, 'Thuc pham'),
+('Muoi iot', 8000, 70, 'Thuc pham'),
+('Nuoc mam Nam Ngu', 40000, 110, 'Gia vi'),
+('Tuong ot Chin-su', 15000, 130, 'Gia vi'),
+('Cafe G7', 55000, 75, 'Do uong'),
+('Tra xanh Khong Do', 10000, 140, 'Do uong'),
+('Bia Heineken', 20000, 200, 'Do uong'),
+('Xuc xich Duc Viet', 25000, 90, 'Thuc pham'),
+('Kem danh rang P/S', 18000, 100, 'Ca nhan'),
+('Xa phong Lifebuoy', 15000, 120, 'Ca nhan'),
+('Nuoc rua chen Sunlight', 30000, 85, 'Gia dung');
+
+SELECT 
+    product_name AS TenSanPham,
+    price AS DonGia
+FROM products
+ORDER BY price ASC
+LIMIT 3;
