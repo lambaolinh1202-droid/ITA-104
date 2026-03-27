@@ -1,0 +1,99 @@
+Bài 1
+DROP TABLE IF EXISTS KhachHang;
+CREATE TABLE KhachHang (
+    MaKH VARCHAR(10) PRIMARY KEY,
+    TenKH VARCHAR(100) NOT NULL,
+    SoDT VARCHAR(15),
+    DiaChi VARCHAR(200)
+);
+INSERT INTO KhachHang (MaKH, TenKH, SoDT, DiaChi) VALUES 
+('KH01', 'Nguyen Van An', '0901234567', 'Quan 1, TP.HCM'),
+('KH02', 'Le Thi Binh', '0988776655', 'Quan 3, TP.HCM');
+SELECT * FROM KhachHang;
+UPDATE KhachHang SET DiaChi = 'TP. Thu Duc' WHERE MaKH = 'KH01';
+SELECT * FROM KhachHang;
+INSERT INTO KhachHang VALUES ('KH03', 'Khach Hang Ao', '000', 'No-where');
+DELETE FROM KhachHang WHERE MaKH = 'KH03';
+SELECT * FROM KhachHang;
+
+DROP TABLE IF EXISTS SanPham;
+CREATE TABLE SanPham (
+    MaSP VARCHAR(10) PRIMARY KEY,
+    TenSP VARCHAR(100) NOT NULL,
+    DonGiaHienTai DECIMAL(18, 2) CHECK (DonGiaHienTai >= 0)
+);
+INSERT INTO SanPham (MaSP, TenSP, DonGiaHienTai) VALUES 
+('SP01', 'Sữa tươi Vinamilk', 7000),
+('SP02', 'Bánh mì gối', 20000),
+('SP03', 'Mì tôm Hảo Hảo', 3500),
+('SP04', 'Nước suối Aquafina', 5000);
+SELECT * FROM SanPham;
+UPDATE SanPham SET DonGiaHienTai = 4000 WHERE MaSP = 'SP03';
+SELECT * FROM SanPham;
+DELETE FROM SanPham WHERE MaSP = 'SP04';
+SELECT * FROM SanPham;
+
+
+Bài 2:
+CREATE TABLE suppliers (
+    supplier_id SERIAL PRIMARY KEY,            -- Số nguyên, tự động tăng, Khóa chính
+    supplier_name VARCHAR(255) NOT NULL,       -- Chuỗi, không được để trống
+    contact_phone VARCHAR(15) UNIQUE           -- Chuỗi, không được trùng lặp
+);
+-- Thêm dữ liệu mẫu
+INSERT INTO suppliers (supplier_name, contact_phone) VALUES 
+('Công ty Sữa Vinamilk', '02838330737'),
+('Nhà máy Bánh mì Kinh Đô', '02838270838'),
+('Đại lý Nước suối Lavie', '19001906');
+
+-- Hiển thị bảng Nhà cung cấp
+SELECT * FROM suppliers;
+
+
+Phần II
+Bài 3:
+ALTER TABLE suppliers 
+ADD COLUMN email VARCHAR(100);
+-- Bước A: Thêm cột supplier_id vào bảng SanPham (hoặc products)
+ALTER TABLE SanPham 
+ADD COLUMN supplier_id INT;
+
+-- Bước B: Tạo ràng buộc Khóa ngoại (Foreign Key)
+ALTER TABLE SanPham 
+ADD CONSTRAINT fk_sanpham_suppliers 
+FOREIGN KEY (supplier_id) REFERENCES suppliers(supplier_id);
+
+
+Bài 4:
+INSERT INTO suppliers (supplier_name, contact_phone, email) VALUES 
+('Công ty Sữa Việt Nam', '0987654321', 'contact@vinamilk.vn'),
+('Công ty Thực phẩm Á Châu', '0912345678', 'contact@acecook.vn');
+
+-- Kiểm tra xem đã thêm thành công chưa
+SELECT * FROM suppliers;
+UPDATE suppliers 
+SET contact_phone = '0911112222' 
+WHERE supplier_name = 'Công ty Thực phẩm Á Châu';
+
+-- Kiểm tra lại thông tin vừa sửa
+SELECT * FROM suppliers WHERE supplier_name = 'Công ty Thực phẩm Á Châu';
+-- Giả sử cột ID của bé là MaSP hoặc product_id
+DELETE FROM SanPham 
+WHERE MaSP = '8'; 
+
+-- Hoặc nếu ID của nước suối là số 8
+-- DELETE FROM SanPham WHERE product_id = 8;
+
+-- Kiểm tra xem sản phẩm đã biến mất chưa
+SELECT * FROM SanPham;
+
+
+Bài 5:
+-- Xóa cột contact_phone khỏi bảng suppliers
+ALTER TABLE suppliers 
+DROP COLUMN contact_phone;
+
+-- Kiểm tra lại cấu trúc bảng xem cột đã mất chưa
+SELECT * FROM suppliers;
+-- Xóa hoàn toàn bảng test_table khỏi hệ thống
+DROP TABLE IF EXISTS test_table;
